@@ -14,6 +14,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
 import AddDrink from './components/alc/AddDrink.js';
+import Drinks from './components/alc/Drinks.js';
 
 import uuid from 'uuid';
 import axios from 'axios';
@@ -40,10 +41,11 @@ if (localStorage.jwtToken) {
   }
 }
 class App extends Component {
-  
+
   state = {
-    drinks: []
-  };  
+    drinks: [],
+    page: 0
+  }
 
   // Toggle Complete
   markShelved = id => {
@@ -67,20 +69,23 @@ class App extends Component {
   };    
 
   // Add drink
-  addDrink = title => {
+  addDrink = (drinkName, ingredients) => {
     axios
-      .post('https://jsonplaceholder.typicode.com/drinks', {
-        title,
-        completed: false
-      })
-      .then(res => {
-        res.data.id = uuid.v4();
-        this.setState({ drinks: [...this.state.drinks, res.data] });
-      });
+    .post(window.location.href+'/drinks/', { 
+      name: drinkName,
+      ingredients: ["vodka"],
+      image: "images/flask.png"
+    })
+    .then(res => {
+      console.log('then error');
+      this.setState({ drinks: [...this.state.drinks, res.data] });
+    })
+    .catch(err => {
+      console.log(err);
+    });
   };
 
-  render() {
-  
+  render() {  
     return (
       <Provider store={store}>
         <Router>
@@ -90,7 +95,7 @@ class App extends Component {
               render={props => (
                 <React.Fragment >
                     <AddDrink addDrink={this.addDrink} />
-                    <drinks
+                    <Drinks
                       drinks={this.state.drinks}
                       markComplete={this.markComplete}
                       delDrink={this.delDrink}

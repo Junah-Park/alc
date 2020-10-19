@@ -39,15 +39,15 @@ app.use("/api/users", users);
 app.use("/api/drinks", drinks);
 
 // CORS
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  if (req.method === 'OPTIONS') {
-      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-      return res.status(200).json({});
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', '*');
+//   if (req.method === 'OPTIONS') {
+//       res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+//       return res.status(200).json({});
+//   }
+//   next();
+// });
 
 const port = process.env.PORT || 5000;
 

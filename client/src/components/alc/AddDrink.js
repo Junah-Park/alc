@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 export class AddDrink extends Component {
   state = {
-    title: ''
+    name: ''
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.addDrink(this.state.title);
-    this.setState({ title: '' });
+    this.props.addDrink(this.state.name, []);
+    this.setState({ name: '' });
   }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -19,10 +19,10 @@ export class AddDrink extends Component {
       <form onSubmit={this.onSubmit} className="mainBody" style={{ display: 'flex' }}>
         <input 
           type="text" 
-          name="title" 
-          style={{ flex: '10', padding: '5px' }}
+          name="name" 
+          style={{ flex: '10', padding: '5px', color: 'white' }}
           placeholder="Add a drink ..." 
-          value={this.state.title}
+          value={this.state.name}
           onChange={this.onChange}
         />
         <input 

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
 
 // Load input validation
 const validateEntry = require("../../validation/drink");
@@ -8,7 +9,7 @@ const validateEntry = require("../../validation/drink");
 const Drink = require("../../models/Drink");
 
 
-router.post("/drinks", (req, res) => {
+router.post("/entry", (req, res) => {
     // Form validation  
     const { errors, isValid } = validateEntry(req.body);
   
@@ -17,15 +18,80 @@ router.post("/drinks", (req, res) => {
       return res.status(400).json(errors);
     }
   
-    User.findOne({ email: req.body.email }).then(user => {
-      if (user) {
+    User.findOne({ name: req.body.name }).then(drink => {
+      if (drink) {
         return res.status(400).json({ name: "Drink already exists" });
       } else {
         const newDrink = new Drink({
-          name: req.body.name,
-          ingredients: req.body.email,
-          password: req.body.password
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.name,
+            ingredients: req.body.ingredients,
+            image: req.body.image
         });
+        
+        newDrink
+        .save()
+        .then(user => res.json(user))
+        .catch(err => console.log(err));
       }
+
+      
     });
-  });
+});
+
+
+router.post("/", (req, res) => {
+    // Form validation  
+    const { errors, isValid } = validateEntry(req.body);
+  
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+  
+    User.findOne({ name: req.body.name }).then(drink => {
+      if (drink) {
+        return res.status(400).json({ name: "Drink already exists" });
+      } else {
+        const newDrink = new Drink({
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.name,
+            ingredients: req.body.ingredients,
+            image: req.body.image
+        });
+        
+        newDrink
+        .save()
+        .then(user => res.json(user))
+        .catch(err => console.log(err));
+      }
+
+      
+    });
+});
+
+router.get("/", (req, res) => {
+    
+  
+    // Check validation
+    // if (!req.index) {
+    //   return res.status(400).json(errors);
+    // }
+  
+    Drink.find()
+    .limit(10)
+    .select('name ingredients image')
+    .exec()
+    .then(docs => {
+        console.log(docs);
+        res.status(200).json(docs);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    })
+});
+  
+module.exports = router;

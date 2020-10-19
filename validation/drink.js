@@ -7,13 +7,13 @@ module.exports = function validateEntry(data) {
   // Convert empty fields to an empty string so we can use validator functions
   data.name = !isEmpty(data.name) ? data.name : "";
 
-  // Email checks
+  // Name check
   if (Validator.isEmpty(data.name)) {
     errors.name = "Name is required";
   }// else if (!Validator.isEmail(data.name)) {
 //     errors.name = "Name is invalid";
 //   }
-  // Password checks
+  // Ingredients check
    if (data.ingredients.length == 0) {
      errors.ingredients = "Ingredients required";
    }
