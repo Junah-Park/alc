@@ -101,7 +101,7 @@ router.delete('/:drinkId', (req, res, next) => {
                 message: 'Product updated',
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:5000/drinks/' + id                    
+                    url: '/drinks/' + id                    
                 }
             });
         })
