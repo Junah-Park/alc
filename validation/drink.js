@@ -14,9 +14,9 @@ module.exports = function validateEntry(data) {
 //     errors.name = "Name is invalid";
 //   }
   // Ingredients check
-   if (data.ingredients.length == 0) {
-     errors.ingredients = "Ingredients required";
-   }
+  if (data.ingredients.length == 0) {
+    errors.ingredients = "Ingredients required";
+  }
 
   return {
     errors,

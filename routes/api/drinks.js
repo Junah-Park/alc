@@ -54,7 +54,7 @@ router.post("/", (req, res) => {
         return res.status(400).json({ name: "Drink already exists" });
       } else {
         const newDrink = new Drink({
-            _id: new mongoose.Types.ObjectId(),
+            id: req.body.id,
             name: req.body.name,
             ingredients: req.body.ingredients,
             image: req.body.image
@@ -80,7 +80,7 @@ router.get("/", (req, res) => {
   
     Drink.find()
     .limit(10)
-    .select('name ingredients image')
+    .select('id name ingredients image')
     .exec()
     .then(docs => {
         console.log(docs);

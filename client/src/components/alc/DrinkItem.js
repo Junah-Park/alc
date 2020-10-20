@@ -15,7 +15,7 @@ export class DrinkItem extends Component {
   };
 
   render() {
-    const { id, title, completed } = this.props.drink;
+    const { id, name, completed } = this.props.drink;
     return (
       <div style={this.getStyle()} >
         <p>
@@ -24,7 +24,7 @@ export class DrinkItem extends Component {
             defaultChecked={completed}
             onChange={this.props.markShelved.bind(this, id)}
           />{" "}
-          {title}
+          {name}
           <button onClick={this.props.delDrink.bind(this, id)} style={btnStyle}>
             x
           </button>
