@@ -15,15 +15,10 @@ export class DrinkItem extends Component {
   };
 
   render() {
-    const { id, name, completed } = this.props.drink;
+    const { id, name, ingredients, image } = this.props.drink;
     return (
       <div style={this.getStyle()} >
         <p>
-          <input
-            type="checkbox"
-            defaultChecked={completed}
-            onChange={this.props.markShelved.bind(this, id)}
-          />{" "}
           {name}
           <button onClick={this.props.delDrink.bind(this, id)} style={btnStyle}>
             x
