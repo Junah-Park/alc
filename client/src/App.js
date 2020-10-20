@@ -12,6 +12,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import Footer from "./components/layout/Footer";
 
 import AddDrink from './components/alc/AddDrink.js';
 import Drinks from './components/alc/Drinks.js';
@@ -42,14 +43,25 @@ if (localStorage.jwtToken) {
 }
 class App extends Component {
 
-  state = {
-    drinks: [],
-    page: 0
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      drinks: [],
+      page: 0
+    };
+
+    axios.get('/api/drinks/')
+    .then(res => {
+        this.setState({ drinks: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   // Toggle Shelved
   markShelved = id => {
-    console.log("shelved runs");
     this.setState({
       drinks: this.state.drinks.map(drink => {
         if (drink.id === id) {
@@ -62,25 +74,28 @@ class App extends Component {
 
   // Delete drink
   delDrink = id => {
-    axios.delete(`http://localhost:5000/api/drinks/${id}`).then(res =>
+    axios.delete(`/api/drinks/${id}`).then(res =>
       this.setState({
         drinks: [...this.state.drinks.filter(drink => drink.id !== id)]
       })
-    );
+    )
+    .catch(err => {
+      console.log(err);
+    });
   };    
 
   // Add drink
-  addDrink = (drinkName, ingredients) => {
+  addDrink = (drinkName, drinkIngredients) => {
     const drinkId = uuidv4();
     axios
-    .post('http://localhost:5000/api/drinks/', { 
+    .post('/api/drinks/', { 
       id: drinkId,
       name: drinkName,
-      ingredients: ["vodka"],
+      ingredients: drinkIngredients,
       image: "images/flask.png"
     })
     .then(res => {
-      this.setState({ drinks: [...this.state.drinks, res.data] });
+      this.setState({ drinks: [ res.data, ...this.state.drinks] });
     })
     .catch(err => {
       console.log(err);
@@ -109,7 +124,8 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            </Switch>
+            </Switch>            
+            <Footer/>
           </div>
         </Router>
       </Provider>

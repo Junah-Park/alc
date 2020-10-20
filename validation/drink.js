@@ -14,7 +14,7 @@ module.exports = function validateEntry(data) {
 //     errors.name = "Name is invalid";
 //   }
   // Ingredients check
-  if (data.ingredients.length == 0) {
+  if (Validator.isEmpty(data.ingredients)) {
     errors.ingredients = "Ingredients required";
   }
 

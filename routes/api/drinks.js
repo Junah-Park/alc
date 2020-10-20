@@ -39,15 +39,10 @@ router.post("/", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-    
-  
-    // Check validation
-    // if (!req.index) {
-    //   return res.status(400).json(errors);
-    // }
   
     Drink.find()
     .limit(10)
+    .sort({$natural:-1})
     .select('id name ingredients image')
     .exec()
     .then(docs => {
@@ -77,7 +72,7 @@ router.delete("/", (req, res, next) => {
 });
 
 router.delete('/:drinkId', (req, res, next) => {
-    Drink.remove({ id: req.params.drinkId})
+    Drink.deleteOne({ id: req.params.drinkId})
      .exec()
      .then( result => {
          res.status(200).json({
@@ -91,6 +86,32 @@ router.delete('/:drinkId', (req, res, next) => {
          });
      });
  });
+
+ router.patch('/:drinkId', (req, res, next) => {
+
+    const searchId = req.params.drinkId;
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    Product.update({ id: searchId }, { $set: updateOps })
+        .exec()
+        .then( result => {
+            res.status(200).json({
+                message: 'Product updated',
+                request: {
+                    type: 'GET',
+                    url: 'http://localhost:5000/drinks/' + id                    
+                }
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
 
 
 module.exports = router;

@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -16,6 +17,11 @@ code {
 .mainBody {  
   margin: 10%;
   color: white;
+}
+
+.descriptionInput {
+  white-space: 'pre-wrap';
+  overflow-wrap: break-word;
 }
 
 .submitDrink {
@@ -29,4 +35,13 @@ code {
 
 .registerButton {
   /* top: 5px; */
+}
+
+footer {
+  padding-top: 48px;
+  margin-bottom: 0px;
+  color: #818181;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
 }

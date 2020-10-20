@@ -5,6 +5,7 @@ export class DrinkItem extends Component {
   getStyle = () => {
     return {
       padding: "10px",
+      margin: "2%",
       borderBottom: "1px #ccc dotted",
       background: this.props.drink.shelved ? "#34bf5c" : "#303030",
     };
@@ -15,7 +16,7 @@ export class DrinkItem extends Component {
   };
 
   render() {
-    const { id, name, ingredients, image } = this.props.drink;
+    const { id, name, ingredients } = this.props.drink;
     return (
       <div style={this.getStyle()} >
         <p>
@@ -23,6 +24,9 @@ export class DrinkItem extends Component {
           <button onClick={this.props.delDrink.bind(this, id)} style={btnStyle}>
             x
           </button>
+          <p style = {{color: 'green', overflow: 'hidden'}}>
+            {ingredients}
+          </p>
         </p>
       </div>
     );
