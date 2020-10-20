@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.1",
     "classnames": "^2.2.6",
+    "cors": "^2.8.5",
     "jwt-decode": "^2.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

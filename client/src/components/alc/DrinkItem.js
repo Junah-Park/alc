@@ -6,12 +6,12 @@ export class DrinkItem extends Component {
     return {
       padding: "10px",
       borderBottom: "1px #ccc dotted",
-      background: this.props.todo.shelved ? "#34bf5c" : "#303030",
+      background: this.props.drink.shelved ? "#34bf5c" : "#303030",
     };
   };
 
   componentDidMount = (props) => {
-    console.log(this.props.todo);
+    console.log(this.props.drink);
   };
 
   render() {

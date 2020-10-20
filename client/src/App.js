@@ -61,7 +61,7 @@ class App extends Component {
 
   // Delete drink
   deldrink = id => {
-    axios.delete(`https://jsonplaceholder.typicode.com/drinks/${id}`).then(res =>
+    axios.delete(`http://localhost:5000/api/drinks/${id}`).then(res =>
       this.setState({
         drinks: [...this.state.drinks.filter(drink => drink.id !== id)]
       })
@@ -71,7 +71,7 @@ class App extends Component {
   // Add drink
   addDrink = (drinkName, ingredients) => {
     axios
-    .post(window.location.href+'/drinks/', { 
+    .post('http://localhost:5000/api/drinks/', { 
       name: drinkName,
       ingredients: ["vodka"],
       image: "images/flask.png"
