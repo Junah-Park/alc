@@ -10,6 +10,9 @@ const drinks = require("./routes/api/drinks");
 
 const app = express();
 
+var distDir = __dirname + "/dist/";
+ app.use(express.static(distDir));
+
 // Bodyparser middleware
 app.use(
   bodyParser.urlencoded({
