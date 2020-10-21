@@ -45,3 +45,8 @@ footer {
   text-align: center;
   position: relative;
 }
+
+githubIcon {
+  width: 50;
+  height: 50;
+}

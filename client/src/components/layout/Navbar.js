@@ -8,6 +8,7 @@ class Navbar extends Component {
         <nav className="z-depth-0">
           <div className="nav-wrapper navbarMain">            
           <img src="./images/flask.ico" width="50" height="50"></img>
+          <a href="https://github.com/Junah-Park/alc"><img src="./images/github.png" alt="Github" width="50" height="50"></img></a>
             <Link
               to="/"
               style={{
