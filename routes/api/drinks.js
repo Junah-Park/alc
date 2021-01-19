@@ -46,7 +46,7 @@ router.get("/", (req, res) => {
     .select('id name ingredients image')
     .exec()
     .then(docs => {
-        console.log(docs);
+        // console.log(docs);
         res.status(200).json(docs);
     })
     .catch(err => {

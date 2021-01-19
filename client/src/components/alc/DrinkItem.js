@@ -8,6 +8,7 @@ export class DrinkItem extends Component {
       margin: "2%",
       borderBottom: "1px #ccc dotted",
       background: this.props.drink.shelved ? "#34bf5c" : "#303030",
+      'white-space': "pre-wrap"
     };
   };
 
@@ -22,7 +23,7 @@ export class DrinkItem extends Component {
         <p>
           {name}
           <button onClick={this.props.delDrink.bind(this, id)} style={btnStyle}>
-            x
+            X
           </button>
           <p style = {{color: 'green', overflow: 'hidden'}}>
             {ingredients}

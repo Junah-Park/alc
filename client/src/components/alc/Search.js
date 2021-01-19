@@ -28,7 +28,7 @@ export class AddDrink extends Component {
         />
         <textarea
           name="ingredients" 
-          style={{ border:'none', flex: '10', padding: '5px', color: 'white', height: '300px'}}
+          style={{ border:'none', flex: '10', padding: '5px', color: 'white' }}
           placeholder="Add a description" 
           value={this.state.ingredients}
           onChange={this.onChange}
@@ -49,4 +49,4 @@ AddDrink.propTypes = {
   addDrink: PropTypes.func.isRequired
 }
 
-export default AddDrink
+export default Search
